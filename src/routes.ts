@@ -1,12 +1,18 @@
 import { Router } from "express";
+
 import multer from "multer";
 import { CreateUserController } from "./controllers/user/createUserController";
+
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
+
 import { CreateCategoreController } from "./controllers/category/CreateCategoreController";
 import { ListCategoryController } from "./controllers/category/ListCategoryController";
+
 import { CreatProductController } from './controllers/product/CreatProductController'
 import { LisByCategoryController } from './controllers/product/LisByCategoryController'
+
+import { CreateOrderController } from "./controllers/order/CreateOrderController";
 
 import { isAuthenticated } from './middlewares/isAuthenticated'
 
@@ -29,9 +35,13 @@ router.post('/category', isAuthenticated, new CreateCategoreController().handle)
 
 router.get('/category', isAuthenticated, new ListCategoryController().handle)
 
-// Rotas Product
+// -- Rotas Product
 router.post('/product', isAuthenticated, upload.single('file'), new CreatProductController().handle)
 
 router.get('/category/product', isAuthenticated, new LisByCategoryController().handle)
+
+// -- Rotas Order
+
+router.post('/order', isAuthenticated, new CreateOrderController().handle)
 
 export { router };
