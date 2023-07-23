@@ -13,7 +13,7 @@ import { CreatProductController } from './controllers/product/CreatProductContro
 import { LisByCategoryController } from './controllers/product/LisByCategoryController'
 
 import { CreateOrderController } from "./controllers/order/CreateOrderController";
-
+import { RemoveOrderController } from "./controllers/order/RemoveOrderController";
 import { isAuthenticated } from './middlewares/isAuthenticated'
 
 import uploadConfig from './config/multer'
@@ -43,5 +43,5 @@ router.get('/category/product', isAuthenticated, new LisByCategoryController().h
 // -- Rotas Order
 
 router.post('/order', isAuthenticated, new CreateOrderController().handle)
-
+router.delete('/order', isAuthenticated, new RemoveOrderController().handle)
 export { router };
