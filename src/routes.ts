@@ -15,6 +15,8 @@ import { LisByCategoryController } from './controllers/product/LisByCategoryCont
 import { CreateOrderController } from "./controllers/order/CreateOrderController";
 import { RemoveOrderController } from "./controllers/order/RemoveOrderController";
 import { AddItemContreller } from "./controllers/order/AddItemContreller";
+import { RemoveItemController } from "./controllers/order/RemoveItemController";
+
 import { isAuthenticated } from './middlewares/isAuthenticated'
 
 import uploadConfig from './config/multer'
@@ -42,7 +44,7 @@ router.post('/order', isAuthenticated, new CreateOrderController().handle)
 router.delete('/order', isAuthenticated, new RemoveOrderController().handle)
 
 router.post('/order/add', isAuthenticated, new AddItemContreller().handle)
-
+router.delete('/order/remove', isAuthenticated, new RemoveItemController().handle)
 
 
 export { router };
