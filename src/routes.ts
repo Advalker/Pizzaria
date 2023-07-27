@@ -14,6 +14,7 @@ import { LisByCategoryController } from './controllers/product/LisByCategoryCont
 
 import { CreateOrderController } from "./controllers/order/CreateOrderController";
 import { RemoveOrderController } from "./controllers/order/RemoveOrderController";
+import { AddItemContreller } from "./controllers/order/AddItemContreller";
 import { isAuthenticated } from './middlewares/isAuthenticated'
 
 import uploadConfig from './config/multer'
@@ -25,23 +26,23 @@ const upload = multer(uploadConfig.upload("./tmp"));
 
 // --- Rotas User --
 router.post('/user', new CreateUserController().handle)
-
 router.post('/session', new AuthUserController().handle)
-
 router.get('/me', isAuthenticated, new DetailUserController().handle)
 
 // -- Rotas category
 router.post('/category', isAuthenticated, new CreateCategoreController().handle)
-
 router.get('/category', isAuthenticated, new ListCategoryController().handle)
 
 // -- Rotas Product
 router.post('/product', isAuthenticated, upload.single('file'), new CreatProductController().handle)
-
 router.get('/category/product', isAuthenticated, new LisByCategoryController().handle)
 
 // -- Rotas Order
-
 router.post('/order', isAuthenticated, new CreateOrderController().handle)
 router.delete('/order', isAuthenticated, new RemoveOrderController().handle)
+
+router.post('/order/add', isAuthenticated, new AddItemContreller().handle)
+
+
+
 export { router };
